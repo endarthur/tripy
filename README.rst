@@ -16,12 +16,12 @@ Getting Started
 
 .. code:: python
 
-    import tripy
+    >>> import tripy
     # Polygon can be clockwise or counter-clockwise
-    polygon = [(0,1), (-1, 0), (0, -1), (1, 0)]
-    triangles = tripy.earclip(polygon)
-    print triangles
-    [((1, 0), (0, 1), (-1, 0)), ((1, 0), (-1, 0), (0, -1))]
+    >>> polygon = [(0,1), (-1, 0), (0, -1), (1, 0)]
+    >>> triangles = tripy.earclip(polygon)
+    >>> print(triangles)
+    [((1, 0), (0, 1), (-1, 0)), ((1, 0), (-1, 0), (0, -1))], [(3, 0, 1), (3, 1, 2)]
 
 
 Examples

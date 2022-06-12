@@ -28,7 +28,7 @@ def earclip(polygon):
     triangles = []
     triangles_indices = []
 
-    polygon = [Point(*point) for i, point in enumerate(polygon)]
+    polygon = [Point(*point, i=i) for i, point in enumerate(polygon)]
 
     if _is_clockwise(polygon):
         polygon.reverse()
