@@ -2,7 +2,7 @@ import math
 import sys
 from collections import namedtuple
 
-Point = namedtuple('Point', ['x', 'y'])
+Point = namedtuple('Point', ['x', 'y', 'i'])
 
 EPSILON = math.sqrt(sys.float_info.epsilon)
 
@@ -26,8 +26,9 @@ def earclip(polygon):
     """
     ear_vertex = []
     triangles = []
+    triangles_indices = []
 
-    polygon = [Point(*point) for point in polygon]
+    polygon = [Point(*point) for i, point in enumerate(polygon)]
 
     if _is_clockwise(polygon):
         polygon.reverse()
@@ -54,6 +55,7 @@ def earclip(polygon):
         polygon.remove(ear)
         point_count -= 1
         triangles.append(((prev_point.x, prev_point.y), (ear.x, ear.y), (next_point.x, next_point.y)))
+        triangles_indices.append((prev_point.i, ear.i, next_point.i))
         if point_count > 3:
             prev_prev_point = polygon[prev_index - 1]
             next_next_index = (i + 1) % point_count
@@ -70,7 +72,7 @@ def earclip(polygon):
                         ear_vertex.append(p)
                 elif p in ear_vertex:
                     ear_vertex.remove(p)
-    return triangles
+    return triangles, triangles_indices
 
 
 def _is_clockwise(polygon):
